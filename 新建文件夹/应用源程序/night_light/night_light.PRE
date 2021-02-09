@@ -1,0 +1,35 @@
+
+.CHIP	PFC161
+//.CHIP	Chip_Name
+//{{PADAUK_CODE_OPTION
+	.Code_Option	Comparator_Edge	All_Edge
+	.Code_Option	LVR		2.5V
+
+	//此处为P-Touch设定的CS引脚，请勿更改
+	.Code_Option	CS_Sel		PA7
+
+	\此处为UART通讯端口，请勿更改
+	.Code_Option	Interrupt_Src0	PA5
+	.Code_Option	TMx_Bit		6BIT
+	.Code_Option	TMx_Source	16MHz
+	.Code_Option	GPC_PWM		Disable
+	.Code_Option	PA3_PA4_Drive	Normal
+	.Code_Option	EMIEnB		Enable
+	.Code_Option	Security	Enable		// Security 7/8 words Enable
+
+//---------------------单线侦错------------------------------------
+//	.Load_Ref       Debug(PA.0)           // 预设以 PA.0 作通讯脚位。
+//-----------------------------------------------------------------
+//}}PADAUK_CODE_OPTION
+
+//	----------- IMPORTANT -------------
+//	Please don't change the follow code
+//	It only be used for internal Mini-C
+//	-----------------------------------
+
+	.JMP	FPPA0	<?>, 0
+.ROMADR	0x10
+	.PUT	Interrupt <reti>, 8
+
+#pragma Disable ICE_LIB_Intr
+//#pragma	disable	logic
